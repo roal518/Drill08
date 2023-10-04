@@ -49,12 +49,15 @@ class Ball:
         self.frame = 0
         if random.randint(0,1) == 1:
             self.image = load_image('ball21x21.png')
+            self.index = 1
         else:
             self.image = load_image('ball41x41.png')
+            self.index = 2
     def update(self):
-        if self.y>75:
+        if self.index==1 and self.y>65:
             self.y -=random.randint(1,4)
-        else:
+        elif self.index==2 and self.y>70:
+            self.y -=random.randint(1,4)
             pass
     def draw(self):
         self.image.draw(self.x,self.y)
