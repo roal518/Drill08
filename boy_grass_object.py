@@ -22,15 +22,17 @@ def reset_world():
     global running
     global grass
     global team
+    global balls
     global world
 #월드 하나로 모든 요소 통제 가독성이 good
-#그래서 cpp 하라는것?
     running =True
     world=[]
     grass=Grass()
     world.append(grass)
+    balls =[Ball()for i in range(20)]
     team =[Boy() for i in range(11)]
     world +=team
+    world +=balls
 class Boy:
     def __init__(self):
         self.x,self.y=random.randint(0,300),90
@@ -45,7 +47,17 @@ class Ball:
     def __init__(self):
         self.x,self.y = random.randint(0,800),random.randint(499,500)
         self.frame = 0
-        self.image = load_image('')
+        if random.randint(0,1) == 1:
+            self.image = load_image('ball21x21.png')
+        else:
+            self.image = load_image('ball41x41.png')
+    def update(self):
+        if self.y>75:
+            self.y -=random.randint(1,4)
+        else:
+            pass
+    def draw(self):
+        self.image.draw(self.x,self.y)
 class Grass:
     def __init__(self):
         self.image = load_image('grass.png')
